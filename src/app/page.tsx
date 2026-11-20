@@ -1,69 +1,93 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { Stats } from "@/components/Stats";
+import { About } from "@/components/About";
+import { Services } from "@/components/Services";
+import { Skills } from "@/components/Skills";
+import { Projects } from "@/components/Projects";
+import { Experience } from "@/components/Experience";
+import { Testimonials } from "@/components/Testimonials";
+import { Education } from "@/components/Education";
+import { ContactModal } from "@/components/ContactModal";
+import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { CustomCursor } from "@/components/CustomCursor";
 
 export default function Home() {
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+
+  const handleOpenContact = () => {
+    setContactModalOpen(true);
+  };
+
+  const handleCloseContact = () => {
+    setContactModalOpen(false);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="relative min-h-screen bg-white text-[#101432] selection:bg-indigo-100 selection:text-indigo-700">
+        {/* 1. Scroll Progress Bar at very top */}
+        <ScrollProgress />
+
+        {/* 2. Fluid Interactive Custom Cursor on Desktop */}
+        <CustomCursor />
+
+          {/* 3. Background Ambient Floating Gradient Accents */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 overflow-hidden -z-10"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <div className="absolute -top-40 right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-b from-purple-100/50 via-indigo-50/40 to-transparent blur-3xl" />
+            <div className="absolute top-10 left-[20%] w-[500px] h-[500px] rounded-full bg-gradient-to-b from-blue-100/40 via-sky-50/30 to-transparent blur-3xl" />
+            <div className="absolute top-[35%] -left-32 w-[550px] h-[550px] rounded-full bg-purple-50/50 blur-3xl" />
+            <div className="absolute top-[65%] -right-32 w-[550px] h-[550px] rounded-full bg-indigo-50/45 blur-3xl" />
+            <div className="absolute bottom-10 right-[-5%] w-[600px] h-[600px] rounded-full bg-indigo-50/50 blur-3xl" />
+          </div>
+
+          {/* 4. Floating Header Navigation */}
+          <Navbar onOpenContact={handleOpenContact} />
+
+          {/* 5. Main Content */}
+          <main className="flex flex-col">
+            {/* Hero Section */}
+            <Hero onOpenContact={handleOpenContact} />
+
+            {/* Stats Glass Card with Animated Counters */}
+            <Stats />
+
+            {/* About Me Section */}
+            <About onOpenContact={handleOpenContact} />
+
+            {/* Services & Solutions with Spotlight Glow Cards */}
+            <Services onOpenContact={handleOpenContact} />
+
+            {/* Technologies & Skills Grid */}
+            <Skills />
+
+            {/* Featured Projects with Animated Category Filter */}
+            <Projects onOpenContact={handleOpenContact} />
+
+          {/* Experience & Let's Work Together Card */}
+          <Experience onOpenContact={handleOpenContact} />
+
+          {/* Client & Collaborator Testimonials */}
+          <Testimonials />
+
+      {/* Education & Credentials */}
+      <Education />
+    </main>
+
+      {/* 6. Footer */ }
+  <Footer />
+
+  {/* 7. Interactive Contact Modal */ }
+  <ContactModal
+    isOpen={contactModalOpen}
+    onClose={handleCloseContact}
+  />
+    </div >
   );
 }
